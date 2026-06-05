@@ -1,0 +1,13 @@
+App(
+    appid="rolllab_research",
+    name="RollLab Research",
+    apptype=FlipperAppType.EXTERNAL,
+    targets=["f7"],
+    entry_point="rolllab_app",
+    stack_size=4 * 1024,
+    fap_category="Sub-GHz",
+    fap_description="Rolling Code Vulnerability Lab — replay, rollback & sync-window analysis",
+    fap_version=(1, 0),
+    fap_author="G4MEOVER18",
+    fap_weburl="https://github.com/G4MEOVER18/RollLab",
+)
