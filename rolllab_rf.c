@@ -2,6 +2,7 @@
 #include "rolllab_rf.h"
 #include <lib/subghz/devices/devices.h>
 #include <lib/subghz/devices/cc1101_int/cc1101_int_interconnect.h>
+#include <applications/drivers/subghz/cc1101_ext/cc1101_ext_interconnect.h>
 #include <lib/toolbox/level_duration.h>
 
 // Interrupt-accessible globals
@@ -76,7 +77,9 @@ static LevelDuration rlab_replay_tx_cb(void* ctx) {
 
 bool rlab_rf_init(RollLabApp* app) {
     subghz_devices_init();
-    app->device = subghz_devices_get_by_name(SUBGHZ_DEVICE_CC1101_INT_NAME);
+    // Prefer external CC1101 (GPIO), fall back to internal
+    app->device = subghz_devices_get_by_name(SUBGHZ_DEVICE_CC1101_EXT_NAME);
+    if(!app->device) app->device = subghz_devices_get_by_name(SUBGHZ_DEVICE_CC1101_INT_NAME);
     if(!app->device) return false;
 
     subghz_devices_begin(app->device);
