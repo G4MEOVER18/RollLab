@@ -83,6 +83,8 @@ The author is not responsible for any misuse.
 If this tool saves you time or helps your research:
 
 - **Bitcoin:** `39vZWmnUwDReQ15BwqQXzyqVQ6U8LardEf`
+
+**Kontakt:** [g4me.over.18@gmail.com](mailto:g4me.over.18@gmail.com)
 - **PayPal:** [paypal.me/Freakbank1](https://paypal.me/Freakbank1)
 
 ---
