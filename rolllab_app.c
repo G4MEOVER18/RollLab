@@ -38,7 +38,15 @@ static void rlab_analyze(RollLabApp* app) {
     uint64_t sum      = 0;
     uint32_t sh_count = 0;
 
-    for(size_t i = 0; i < sig->count; i++) {
+    // Silence-Terminator-Flanke (letzte Flanke, LOW, >= RLAB_SILENCE_US) aus der
+    // Statistik ausschliessen — sie markiert nur das Signalende (RX-ready-Kriterium).
+    size_t stat_count = sig->count;
+    if(stat_count > 0) {
+        uint32_t last = sig->buf[stat_count - 1];
+        if(!(last & 0x80000000UL) && (last & 0x7FFFFFFFUL) >= RLAB_SILENCE_US) stat_count--;
+    }
+
+    for(size_t i = 0; i < stat_count; i++) {
         uint32_t dur = sig->buf[i] & 0x7FFFFFFFUL;
         if(!dur) continue;
         a->edge_count++;
@@ -64,7 +72,7 @@ static void rlab_analyze(RollLabApp* app) {
     // OOK heuristic: bi-modal duration distribution (short vs long pulses)
     if(a->max_us > a->min_us) {
         uint32_t thresh = a->min_us + (a->max_us - a->min_us) / 3;
-        for(size_t i = 0; i < sig->count; i++) {
+        for(size_t i = 0; i < stat_count; i++) {
             uint32_t dur = sig->buf[i] & 0x7FFFFFFFUL;
             if(dur && dur <= thresh) sh_count++;
         }
