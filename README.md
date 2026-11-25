@@ -1,5 +1,7 @@
 # RollLab Research
 
+[![CI](https://github.com/G4MEOVER18/RollLab/actions/workflows/flipper-fap.yml/badge.svg)](https://github.com/G4MEOVER18/RollLab/actions/workflows/flipper-fap.yml)
+
 ```
  ██████╗ ██╗  ██╗███╗   ███╗███████╗ ██████╗ ██╗   ██╗███████╗██████╗
 ██╔════╝ ██║  ██║████╗ ████║██╔════╝██╔═══██╗██║   ██║██╔════╝██╔══██╗
